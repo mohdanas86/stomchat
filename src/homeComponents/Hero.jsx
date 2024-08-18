@@ -7,9 +7,9 @@ const Hero = () => {
   return (
     <>
       <div className="header w-full shadow bg-black text-white">
-        <div className="flex flex-col gap-3 justify-center text-center md:text-start items-center w-full md:w-[1200px] mx-auto px-4 py-0 md:px-0 md:py-3">
+        <div className="flex flex-col gap-3 justify-center  md:text-start items-center w-full md:w-[1200px] mx-auto px-4 py-0 md:px-0 md:py-3">
           {/* TITLE */}
-          <h2 className="title mt-4 text-4xl font-semibold">
+          <h2 className="title mt-4 text-4xl font-semibold mx-auto w-full text-center">
             Introducing <span className="text-violet-600">Stom</span>Chat
           </h2>
           <div className=" justify-center items-center flex font-semibold">
@@ -32,7 +32,7 @@ const Hero = () => {
 export const StomChatContent = () => {
   return (
     <div className="max-w-4xl mx-auto p-6 bg-black text-white rounded-lg shadow-lg">
-      <header className="text-center md:text-start mb-8">
+      <header className=" md:text-start mb-8">
         {/* <h1 className="text-3xl font-bold text-white">Welcome to StomChat</h1> */}
         <p className="mt-2 text-lg text-gray-300">
           An innovative chatbot designed to enhance your digital interactions with seamless and intelligent conversations. Built using the MERN stack and powered by the Gemini API, StomChat offers a unique and dynamic experience, making it a valuable tool for businesses and individuals alike.
@@ -48,7 +48,7 @@ export const StomChatContent = () => {
 
       <section className="mb-8">
         <h2 className="text-2xl font-semibold text-white">Technology Stack</h2>
-        <div className="mt-2 space-y-4 text-gray-400 text-center md:text-start">
+        <div className="mt-2 space-y-4 text-gray-400  md:text-start">
           <div>
             <h3 className="text-xl font-semibold text-gray-300">1. MERN Stack:</h3>
             <ul className="list-disc list-inside mt-2">
