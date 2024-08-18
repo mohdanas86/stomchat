@@ -17,7 +17,7 @@ const Chat = () => {
       if (prompt == "" || prompt == " ") {
         return 0;
       } else {
-        const res = await Axios.get("http://localhost:3000/chat", {
+        const res = await Axios.get("https://chatbotbyanasbackend.onrender.com/chat", {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");

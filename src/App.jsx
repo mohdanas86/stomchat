@@ -1,5 +1,4 @@
 import React from "react";
-import Form from "./components/form";
 import Hero from "./homeComponents/Hero";
 import Footer from "./components/Footer";
 
