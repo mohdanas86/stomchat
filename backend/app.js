@@ -4,7 +4,7 @@ const app = express();
 const cors = require("cors");
 
 const corsOptions = {
-    origin: "https://chatbotbyanas.onrender.com/"
+    origin: "https://chatbotbyanas.onrender.com"
 };
 app.use(cors(corsOptions));
 
