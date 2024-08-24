@@ -3,10 +3,11 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const express = require("express");
 const bodyParser = require("body-parser"); // Middleware to parse JSON
 const chat = express.Router();
+require('dotenv').config(); // Load environment variables
+
 
 // Access your API key from an environment variable
-const API_KEY = "AIzaSyDGr__1-pVIXzgbVcq48xzTmY0jqoQlzxE";
-const genAI = new GoogleGenerativeAI("AIzaSyDGr__1-pVIXzgbVcq48xzTmY0jqoQlzxE");
+const genAI = new GoogleGenerativeAI(process.env.Chat_Api_Key);
 
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

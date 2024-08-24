@@ -43,20 +43,42 @@ const Chat = () => {
       });
   };
 
+  // AUTO WRITE ANIMATION
+  const [displayedText, setDisplayedText] = useState("");
+
+  useEffect(() => {
+    let index = 0;
+    const intervalId = setInterval(() => {
+      setDisplayedText(response.substring(0, index + 1));
+      index += 1;
+      if (index >= response.length) {
+        clearInterval(intervalId);
+      }
+    }, 0.5);
+
+    return () => clearInterval(intervalId);
+  }, [response]);
+
   return (
     <div className="relative w-full md:w-[100%] mx-auto py-4 px-4 bg-black text-white">
-      {/* SEARCH CONTAINER */}
-      {/* From Uiverse.io by ahmed150up   */}
       <div className="card bg-white border-0 w-full md:w-[80%] mx-auto">
+        {/* GENRATED TEXT CONTAINER */}
         <div className="chat-header bg-white border-0">
-          <ReactMarkdown className="prose lg:prose-xl grid gap-4 bg-black text-white border-0">
-            {response}
-          </ReactMarkdown>
+          {response && (
+            <div className="autotype">
+              <span className="typing-text">
+                <ReactMarkdown className="prose lg:prose-xl grid gap-4 bg-black text-white border-0">
+                  {displayedText}
+                </ReactMarkdown>
+              </span>
+            </div>
+          )}
 
+          {/* COPY CONTAINER */}
           {response ? (
             <>
               <div className="responseBar mb-[20%] md:mb-[10%] w-full py-4 px-4 border-t mt-8 relative">
-                <span className=" cursor-pointer" onClick={copy}>
+                <span className="cursor-pointer" onClick={copy}>
                   <FaRegCopy />
                 </span>
 
@@ -82,6 +104,8 @@ const Chat = () => {
             ""
           )}
         </div>
+
+        {/* FORM OF HANDELING PROMPT */}
         <form
           onClick={handleSubmit}
           className="chat-input border border-white rounded-3xl fixed bottom-4 left-[10%] w-[80%] bg-black"

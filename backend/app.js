@@ -4,11 +4,11 @@ const app = express();
 const cors = require("cors");
 
 const corsOptions = {
-    origin: "https://chatbotbyanas.onrender.com"
+    origin: "http://localhost:3000"
 };
 app.use(cors(corsOptions));
 
-const port = 3000; // PORT
+const port = 3001; // PORT
 app.use(express.json())
 const bodyParser = require("body-parser");
 app.use(bodyParser.json())
