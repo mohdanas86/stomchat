@@ -133,3 +133,30 @@
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
+
+
+
+
+@keyframes cursor-blink {
+  0% { border-color: transparent; }
+  100% { border-color: black; }
+}
+
+.autotype {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Allow the container to take full width */
+  max-width: 100%; /* Prevent overflow */
+  /* white-space: nowrap; Prevent text from wrapping */
+  overflow: hidden; /* Hide overflow text */
+  border-right: 3px solid black; /* Simulate cursor */
+  animation: cursor-blink 1s step-end infinite;
+  text-wrap: wrap;
+}
+
+.typing-text {
+  display: inline;
+  /* font-family: 'Courier New', Courier, monospace; Monospace font for typing effect */
+}
+
+
