@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import Axios from "axios";
 import "../App.css";
 
+// ICONS
 import { FaLocationArrow } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa6";
 
@@ -11,13 +12,14 @@ const Chat = () => {
   const [response, setResponse] = useState("");
   const [isCopied, setIsCopied] = useState(false);
 
+  // HANDEL SUBMIT
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (prompt == "" || prompt == " ") {
-        return 0;
+      if (prompt === "" || prompt.trim() === "") {
+        return;
       } else {
-        const res = await Axios.get("https://chatbotbyanasbackend.onrender.com/chat", {
+        const res = await Axios.get("http://localhost:3001/chat", {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");
@@ -28,6 +30,7 @@ const Chat = () => {
     }
   };
 
+  // COPY TEXT
   const copy = () => {
     navigator.clipboard
       .writeText(response)
