@@ -3,6 +3,9 @@ import ReactMarkdown from "react-markdown";
 import Axios from "axios";
 import "../App.css";
 
+// CONTEXT
+import { useMyContext } from "../context/MyContext";
+
 // ICONS
 import { FaLocationArrow } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa6";
@@ -11,6 +14,7 @@ const Chat = () => {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const { dark, setDark } = useMyContext();
 
   // HANDEL SUBMIT
   const handleSubmit = async (e) => {
@@ -60,14 +64,22 @@ const Chat = () => {
   }, [response]);
 
   return (
-    <div className="relative w-full md:w-[100%] mx-auto py-4 px-4 bg-black text-white">
+    <div
+      className={`relative w-full md:w-[100%] mx-auto py-4 px-4 ${
+        dark ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
       <div className="card bg-white border-0 w-full md:w-[80%] mx-auto">
         {/* GENRATED TEXT CONTAINER */}
         <div className="chat-header bg-white border-0">
           {response && (
             <div className="autotype">
               <span className="typing-text">
-                <ReactMarkdown className="prose lg:prose-xl grid gap-4 bg-black text-white border-0">
+                <ReactMarkdown
+                  className={`prose lg:prose-xl grid gap-4 border-0 ${
+                    dark ? "bg-black text-white" : "bg-white text-black"
+                  }`}
+                >
                   {displayedText}
                 </ReactMarkdown>
               </span>
@@ -78,23 +90,12 @@ const Chat = () => {
           {response ? (
             <>
               <div className="responseBar mb-[20%] md:mb-[10%] w-full py-4 px-4 border-t mt-8 relative">
-                <span className="cursor-pointer" onClick={copy}>
+                <span className={`cursor-pointer ${!dark? "text-black bg-black" : "text-white bg-white"}`} onClick={copy}>
                   <FaRegCopy />
                 </span>
 
                 {isCopied ? (
-                  <div className="toast w-[80%] md:w-[20%] absolute left-0 md:top-12 top-2">
-                    <div className="toast-content">copied</div>
-                    <div className="toast-icon">
-                      <svg
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M15.795 8.342l-5.909 9.545a1 1 0 0 1-1.628 0l-3.182-4.909a1 1 0 0 1 1.629-1.165l2.556 3.953L14.165 7.51a1 1 0 0 1 1.63 1.165z"></path>
-                      </svg>
-                    </div>
-                  </div>
+                 <div className={`flex justify-center items-center p-1 rounded-lg w-20 ${dark? "text-black bg-white" : "text-white bg-black"}`}>coped</div>
                 ) : (
                   " "
                 )}
@@ -108,7 +109,11 @@ const Chat = () => {
         {/* FORM OF HANDELING PROMPT */}
         <form
           onClick={handleSubmit}
-          className="chat-input border border-white rounded-3xl fixed bottom-4 left-[10%] w-[80%] bg-black"
+          className={`chat-input border rounded-3xl fixed bottom-4 md:left-[15%] md:w-[70%] left-[10%] w-[80%] ${
+            dark
+              ? "bg-black text-white border-white"
+              : "bg-white text-black border-black"
+          }`}
         >
           <input
             type="text"
@@ -118,7 +123,11 @@ const Chat = () => {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
           />
-          <button className="send-btn text-violet-500">
+          <button
+            className={`send-btn text-violet-500 ${
+              dark ? "bg-black text-white" : "bg-white text-black"
+            }`}
+          >
             <FaLocationArrow />
           </button>
         </form>

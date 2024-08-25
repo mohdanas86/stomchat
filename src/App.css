@@ -98,12 +98,10 @@
 .send-btn {
   border: none;
   outline: none;
-  color: #333;
   font-size: 18px;
   font-weight: 100;
   padding: 5px 10px;
   cursor: pointer;
-  color: white;
 }
 
 .send-btn:hover {
@@ -113,11 +111,9 @@
 .toast {
   bottom: 20px;
   right: 20px;
-  background-color: #333;
-  color: #fff;
   padding: 20px 10px;
   border-radius: 5px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -126,7 +122,7 @@
 .toast-icon svg {
   width: 30px;
   height: 20px;
-  fill: #fff;
+  /* fill: #fff; */
 }
 
 .toast-content {
@@ -156,7 +152,9 @@
 
 .typing-text {
   display: inline;
-  /* font-family: 'Courier New', Courier, monospace; Monospace font for typing effect */
 }
+
+
+
 
 
