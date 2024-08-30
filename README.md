@@ -8,7 +8,7 @@ You can explore StomChat in action at [https://stomchat.netlify.app/](https://st
 
 ## Developed By
 
-**Anas Alam Bca Data Science Srm University**
+**Anas Alam** Bca Data Science Srm University
 
 ## Features
 
