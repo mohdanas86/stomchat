@@ -8,27 +8,21 @@ import { useMyContext } from "../context/MyContext";
 
 // ICONS
 import { FaLocationArrow } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 import { FaRegCopy } from "react-icons/fa6";
 
 const Chat = () => {
   const demoPromptObj = [
-    { data: "data science" },
-    { data: "big data" },
-    { data: "web development" }, // Fixed typo here
-    { data: "machine learning" },
+    { data: "Data science" },
+    { data: "Big data" },
+    { data: "Web development" }, // Fixed typo here
+    { data: "Machine learning" },
   ];
 
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [isCopied, setIsCopied] = useState(false);
   const { dark } = useMyContext(); // Removed setDark as it's not used
-
-  const dataRef = useRef(null); // Changed to null
-
-  const demoPromptFunc = () => {
-    const value = dataRef.current ? dataRef.current.innerText : "";
-    setPrompt(value);
-  };
 
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
@@ -83,9 +77,24 @@ const Chat = () => {
         dark ? "bg-black text-white" : "bg-white text-black"
       }`}
     >
-      <div className="card bg-white border-0 w-full md:w-[80%] mx-auto">
+      <div className="card bg-white border-0 w-full md:w-[60%] mx-auto">
+        {/* USER PROMPT */}
+        {response ? (
+          <div className={`userPrompt w-full flex justify-end items-center`}>
+            <p
+              className={`py-3 px-6 rounded-xl ${
+                !dark ? "bg-gray-100" : "bg-[#242424] text-white"
+              }`}
+            >
+              {prompt}
+            </p>
+          </div>
+        ) : (
+          ""
+        )}
+
         {/* GENERATED TEXT CONTAINER */}
-        <div className="chat-header bg-white border-0">
+        <div className="chat-header bg-white border-0 ">
           {response ? (
             <>
               <div className="autotype">
@@ -128,17 +137,17 @@ const Chat = () => {
                 dark ? "bg-black text-white" : "bg-white text-black"
               }`}
             >
-              <div className="grid grid-cols-2 gap-4">
+              {/* DEMO PROMPT */}
+              <div className="grid md:grid-cols-2 w-full md:w-[60%] grid-cols-1 px-10 gap-4 fixed bottom-[12%] md:bottom-[15%]">
                 {demoPromptObj.map((v, i) => (
                   <div
                     key={i}
-                    className={`demoPrompt font-semibold border flex justify-center items-center py-3 px-4 rounded shadow ${
+                    className={`w-full demoPrompt font-semibold border flex justify-start items-center py-3 px-4 rounded-lg shadow ${
                       dark
                         ? "bg-black text-white border-white"
                         : "bg-white text-black border-gray-300"
                     }`}
-                    ref={dataRef}
-                    onClick={demoPromptFunc}
+                    onClick={() => setPrompt(v.data)}
                   >
                     {v.data}
                   </div>
@@ -151,7 +160,7 @@ const Chat = () => {
         {/* FORM OF HANDLING PROMPT */}
         <form
           onSubmit={handleSubmit} // Changed onClick to onSubmit
-          className={`chat-input border rounded-3xl fixed bottom-4 md:left-[15%] md:w-[70%] left-[10%] w-[80%] ${
+          className={`chat-input border rounded-3xl fixed bottom-4 md:left-[25%] md:w-[50%] left-[10%] w-[80%] ${
             dark
               ? "bg-black text-white border-white"
               : "bg-white text-black border-black"
@@ -167,11 +176,11 @@ const Chat = () => {
           />
           <button
             type="submit" // Added type="submit"
-            className={`send-btn text-violet-500 ${
-              dark ? "bg-black text-white" : "bg-white text-black"
+            className={`send-btn p-1.5 rounded-full ${
+              !dark ? "bg-black bg-gray-300" : "bg-white text-black"
             }`}
           >
-            <FaLocationArrow />
+            <FaArrowUp />
           </button>
         </form>
       </div>
