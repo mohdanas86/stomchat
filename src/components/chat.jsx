@@ -31,7 +31,7 @@ const Chat = () => {
       if (prompt === "" || prompt.trim() === "") {
         return;
       } else {
-        const res = await Axios.get("https://chatbotbyanasbackend.onrender.com/chat", {
+        const res = await Axios.get("https://form-4b0c.onrender.com/chat", {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");
