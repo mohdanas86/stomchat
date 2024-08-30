@@ -44,7 +44,7 @@ const Register = () => {
     }
 
     try {
-      const url = "https://form-4b0c.onrender.com//register";
+      const url = "https://form-4b0c.onrender.com/register";
       const response = await axios.post(url, formData);
       // console.log(response.data);
       const auth_token = await response.data;

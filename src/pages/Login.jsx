@@ -37,7 +37,7 @@ const Login = () => {
     }
 
     try {
-      const url = "https://form-4b0c.onrender.com//login";
+      const url = "https://form-4b0c.onrender.com/login";
       const response = await axios.post(url, formData);
       console.log(response.data);
       const auth_token = await response.data;
