@@ -5,7 +5,7 @@ const cors = require("cors");
 require('dotenv').config();
 
 const corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "https://main--golden-peony-59556f.netlify.app"
 };
 app.use(cors(corsOptions));
 
