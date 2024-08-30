@@ -5,7 +5,7 @@ const cors = require("cors");
 require('dotenv').config();
 
 const corsOptions = {
-    origin: "https://main--golden-peony-59556f.netlify.app"
+    origin: "https://stomchat.netlify.app"
 };
 app.use(cors(corsOptions));
 
