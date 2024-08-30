@@ -8,7 +8,7 @@ You can explore StomChat in action at [https://stomchat.netlify.app/](https://st
 
 ## Developed By
 
-**Anas (38)**
+**Anas Alam Bca Data Science Srm University**
 
 ## Features
 
@@ -71,13 +71,9 @@ To get started with StomChat, follow these steps:
 
 We welcome contributions to StomChat. Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
 
-## License
-
-StomChat is licensed under the [MIT License](LICENSE).
-
 ## Contact
 
-For any questions or support, please reach out to Anas at [your.email@example.com](mailto:your.email@example.com).
+For any questions or support, please reach out to Anas at [coadanas@gmail.com](mailto:coadanas@gmail.com).
 
 ---
 
