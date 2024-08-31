@@ -26,12 +26,14 @@ const Chat = () => {
 
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
+    const local_url = "http://localhost:3001/chat";
+    const url = "https://form-4b0c.onrender.com/chat";
     e.preventDefault();
     try {
       if (prompt === "" || prompt.trim() === "") {
         return;
       } else {
-        const res = await Axios.get("https://form-4b0c.onrender.com/chat", {
+        const res = await Axios.get(url, {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");
@@ -138,11 +140,11 @@ const Chat = () => {
               }`}
             >
               {/* DEMO PROMPT */}
-              <div className="grid md:grid-cols-2 w-full md:w-[60%] grid-cols-1 px-10 gap-4 fixed bottom-[12%] md:bottom-[15%]">
+              <div className="grid md:grid-cols-2 w-full md:w-[60%] grid-cols-1 px-10 gap-4 fixed bottom-[14%] md:bottom-[15%]">
                 {demoPromptObj.map((v, i) => (
                   <div
                     key={i}
-                    className={`w-full demoPrompt font-semibold border flex justify-start items-center py-3 px-4 rounded-lg shadow ${
+                    className={`w-full demoPrompt font-semibold border flex justify-start items-center py-3 px-4 md:rounded-lg rounded-xl shadow ${
                       dark
                         ? "bg-black text-white border-white"
                         : "bg-white text-black border-gray-300"
@@ -163,13 +165,15 @@ const Chat = () => {
           className={`chat-input border rounded-3xl fixed bottom-4 md:left-[25%] md:w-[50%] left-[10%] w-[80%] ${
             dark
               ? "bg-black text-white border-white"
-              : "bg-white text-black border-black"
+              : "bg-[#F1F1F1] text-black border-transparent"
           }`}
         >
           <input
             type="text"
             id="prompt"
-            className="message-input"
+            className={`message-input ${
+              !dark ? "placeholder:text-slate-600" : "placeholder:text-white"
+            }`}
             placeholder="Type your message here"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
@@ -177,7 +181,7 @@ const Chat = () => {
           <button
             type="submit" // Added type="submit"
             className={`send-btn p-1.5 rounded-full ${
-              !dark ? "bg-black bg-gray-300" : "bg-white text-black"
+              !dark ? "bg-gray-300" : "bg-white text-black"
             }`}
           >
             <FaArrowUp />

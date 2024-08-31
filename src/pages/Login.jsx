@@ -6,6 +6,7 @@ import axios from "axios";
 import {useMyContext} from "../context/MyContext"
 
 const Login = () => {
+    const logo = 'https://stomilar-blog.onrender.com/loogo.jpg'
   const emailRef = useRef();
   const passRef = useRef();
 
@@ -37,6 +38,7 @@ const Login = () => {
     }
 
     try {
+      const local_url = "http://localhost:3001/login";
       const url = "https://form-4b0c.onrender.com/login";
       const response = await axios.post(url, formData);
       console.log(response.data);
@@ -55,9 +57,13 @@ const Login = () => {
           <div className="flex justify-center items-center w-full order-2 md:order-1">
             <form
               onSubmit={handelSubmit}
-              className="w-full border max-w-md p-4 md:p-8 rounded-lg shadow-md bg-white flex flex-col gap-4"
+              className="w-full md:border max-w-md md:py-8 md:px-8 py-6 px-2 rounded-lg md:shadow-md bg-white flex flex-col gap-4"
             >
-              <h3 className="text-2xl font-bold capitalize mb-4 text-black">Sign In</h3>
+              <h3 className="w-full text-center md:text-start md:text-2xl text-3xl font-bold capitalize md:mb-8 mb-2 text-black">Welcome</h3>
+
+              <div className="md:hidden w-[25%] mx-auto mb-8">
+                <img src={logo} alt="" />
+              </div>
 
               {/* INPUTS */}
               <div className="flex items-center border-b-2 border-gray-300 p-2">
@@ -89,7 +95,7 @@ const Login = () => {
               {/* SUBMIT BUTTON */}
               <button
                 type="submit"
-                className="w-full py-2 bg-violet-500 text-white font-semibold rounded-lg mt-6"
+                className="w-full py-2 bg-violet-500 text-white font-semibold rounded-full md:mt-8 mt-12"
               >
                 Sign In
               </button>
@@ -98,18 +104,18 @@ const Login = () => {
               <p className="text-center capitalize mt-4 text-black">
                 Don't have an account?{" "}
                 <a className="underline text-violet-500" onClick={(e)=>setLogin((e)=>!e)}>
-                  Register
+                  Sign up
                 </a>
               </p>
             </form>
           </div>
 
           {/* LOGIN IMAGE */}
-          <div className="flex justify-center items-center w-full order-1 md:order-2">
+          <div className="hidden md:flex justify-center items-center w-full order-1 md:order-2">
             <img
               src={LoginImg}
               alt="login img"
-              className="w-full h-[300px] md:h-[70%] object-cover md:object-contain"
+              className="w-[250px] md:w-full h-[250px] md:h-[70%] object-cover md:object-contain"
             />
           </div>
         </div>

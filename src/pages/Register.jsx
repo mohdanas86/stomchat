@@ -7,6 +7,7 @@ import LoginImg from "../assets/regsiter.svg";
 import { useMyContext } from "../context/MyContext";
 
 const Register = () => {
+  const logo = "https://stomilar-blog.onrender.com/loogo.jpg";
   const nameRef = useRef();
   const emailRef = useRef();
   const passRef = useRef();
@@ -44,6 +45,7 @@ const Register = () => {
     }
 
     try {
+      const local_url = "http://localhost:3001/register";
       const url = "https://form-4b0c.onrender.com/register";
       const response = await axios.post(url, formData);
       // console.log(response.data);
@@ -56,14 +58,16 @@ const Register = () => {
 
   return (
     <>
-      <div className={`loginCon max-w-screen-xl ${dark ? "bg-white" : "bg-white"}`}>
+      <div
+        className={`loginCon max-w-screen-xl ${dark ? "bg-white" : "bg-white"}`}
+      >
         <div className="w-full md:w-[1024px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 py-8 px-4">
           {/* LOGIN IMAGE */}
-          <div className="flex justify-center items-center w-full h-full md:order-1">
+          <div className="hidden md:flex justify-center items-center w-full h-full md:order-1">
             <img
               src={LoginImg}
               alt="login img"
-              className="w-full h-[300px] md:h-[70%] object-cover md:object-contain"
+              className="w-[250px] md:w-full h-[250px] md:h-[70%] object-cover md:object-contain"
             />
           </div>
 
@@ -71,11 +75,15 @@ const Register = () => {
           <div className="flex justify-center items-center w-full h-full md:order-2">
             <form
               onSubmit={handleSubmit}
-              className="w-full border max-w-md p-4 md:p-8 rounded-lg shadow-md bg-white flex flex-col gap-4"
+              className="w-full md:border max-w-md md:py-8 md:px-8 py-6 px-2 rounded-lg md:shadow-md bg-white flex flex-col gap-4"
             >
-              <div className="pb-4">
-                <h3 className={`text-2xl font-bold capitalize text-black`}>Registration</h3>
+             
+             <h3 className="w-full text-center md:text-start md:text-2xl text-3xl font-bold capitalize md:mb-8 mb-2 text-black">Sign Up</h3>
+
+              <div className="md:hidden w-[25%] mx-auto mb-8">
+                <img src={logo} alt="" />
               </div>
+             
               {/* ====== INPUTS ======= */}
               <div className="flex items-center border-b-2 border-gray-300 p-2">
                 <input
@@ -119,7 +127,7 @@ const Register = () => {
               {/* SUBMIT BTN */}
               <button
                 type="submit"
-                className="w-full py-2 bg-violet-500 text-white font-semibold rounded-lg mt-6"
+                className="w-full py-2 bg-violet-500 text-white font-semibold rounded-full md:mt-8 mt-12"
               >
                 Sign Up
               </button>
@@ -131,7 +139,7 @@ const Register = () => {
                   className="underline text-violet-500"
                   onClick={(e) => setLogin((e) => !e)}
                 >
-                 Login
+                  sign in
                 </a>
               </p>
             </form>
