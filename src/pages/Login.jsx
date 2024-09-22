@@ -3,14 +3,14 @@ import { IoMailOutline, IoLockClosedOutline } from "react-icons/io5";
 import LoginImg from "../assets/login.svg";
 import axios from "axios";
 
-import {useMyContext} from "../context/MyContext"
+import { useMyContext } from "../context/MyContext";
 
 const Login = () => {
-    const logo = 'https://stomilar-blog.onrender.com/loogo.jpg'
+  const logo = "https://stomilar-blog.onrender.com/loogo.jpg";
   const emailRef = useRef();
   const passRef = useRef();
 
-  const {setServerToken, login, setLogin, dark} = useMyContext();
+  const { setServerToken, login, setLogin, dark } = useMyContext();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -40,7 +40,7 @@ const Login = () => {
     try {
       const local_url = "http://localhost:3001/login";
       const url = "https://form-4b0c.onrender.com/login";
-      const response = await axios.post(url, formData);
+      const response = await axios.post(local_url, formData);
       console.log(response.data);
       const auth_token = await response.data;
       setServerToken(auth_token.token);
@@ -51,7 +51,11 @@ const Login = () => {
 
   return (
     <>
-      <div className={`loginCon max-w-screen-xl mx-auto px-4 ${dark ? "bg-white" : "bg-white"}`}>
+      <div
+        className={`loginCon max-w-screen-xl mx-auto px-4 ${
+          dark ? "bg-white" : "bg-white"
+        }`}
+      >
         <div className="w-full md:w-[1024px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 py-8">
           {/* FORM */}
           <div className="flex justify-center items-center w-full order-2 md:order-1">
@@ -59,7 +63,9 @@ const Login = () => {
               onSubmit={handelSubmit}
               className="w-full md:border max-w-md md:py-8 md:px-8 py-6 px-2 rounded-lg md:shadow-md bg-white flex flex-col gap-4"
             >
-              <h3 className="w-full text-center md:text-start md:text-2xl text-3xl font-bold capitalize md:mb-8 mb-2 text-black">Welcome</h3>
+              <h3 className="w-full text-center md:text-start md:text-2xl text-3xl font-bold capitalize md:mb-8 mb-2 text-black">
+                Welcome
+              </h3>
 
               <div className="md:hidden w-[25%] mx-auto mb-8">
                 <img src={logo} alt="" />
@@ -103,7 +109,10 @@ const Login = () => {
               {/* NEXT PAGE BUTTON */}
               <p className="text-center capitalize mt-4 text-black">
                 Don't have an account?{" "}
-                <a className="underline text-violet-500" onClick={(e)=>setLogin((e)=>!e)}>
+                <a
+                  className="underline text-violet-500"
+                  onClick={(e) => setLogin((e) => !e)}
+                >
                   Sign up
                 </a>
               </p>

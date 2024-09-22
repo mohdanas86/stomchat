@@ -9,13 +9,13 @@ LoginRouter
 async function postLogin(req, res) {
     try {
         const obj = req.body;
-        const user = await UserModel.findOne({email : obj.email})
-        console.log(user)
-        res.json({
+        const user = await UserModel.findOne({ email: obj.email })
+        return res.json({
             mesage: "user login",
             data: user,
             token: await user.genrateToken()
         })
+        console.log(user)
     } catch (err) {
         console.log(err, "login problem")
     }

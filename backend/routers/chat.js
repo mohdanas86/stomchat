@@ -17,8 +17,12 @@ chat.use(bodyParser.json());
 chat.route("/").get(getResponse);
 
 async function getResponse(req, res) {
-    const prompt = req.query.prompt || "Write a story about an AI and magic"; // Use query params for dynamic prompt
+    // const prompt = req.query.prompt || "Write a story about an AI and magic"; // Use query params for dynamic prompt
+
+    const prompt = req.query.prompt;
+    
     try {
+        // console.log(prompt.trim(prompt))
         const result = await model.generateContent(prompt);
         const response = await result.response.text(); // Await text() as it returns a promise
 
@@ -26,7 +30,7 @@ async function getResponse(req, res) {
             message: "Prompt response",
             data: response
         });
-        console.log(response);
+       // console.log(response);
     } catch (err) {
         console.error("Error generating content:", err);
         res.status(500).json({

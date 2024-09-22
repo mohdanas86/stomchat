@@ -22,7 +22,7 @@ const Chat = () => {
   const [prompt, setPrompt] = useState("");
   const [response, setResponse] = useState("");
   const [isCopied, setIsCopied] = useState(false);
-  const { dark } = useMyContext(); // Removed setDark as it's not used
+  const { dark, Languagae, setLanguagae } = useMyContext(); // Removed setDark as it's not used
 
   // HANDLE SUBMIT
   const handleSubmit = async (e) => {
@@ -33,7 +33,10 @@ const Chat = () => {
       if (prompt === "" || prompt.trim() === "") {
         return;
       } else {
-        const res = await Axios.get(url, {
+        const lang = `${prompt}  ${Languagae}`;
+        setPrompt(lang)
+        console.log(prompt)
+        const res = await Axios.get(local_url, {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");
