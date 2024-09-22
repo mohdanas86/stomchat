@@ -47,7 +47,7 @@ const Register = () => {
     try {
       const local_url = "http://localhost:3001/register";
       const url = "https://form-4b0c.onrender.com/register";
-      const response = await axios.post(url, formData);
+      const response = await axios.post(local_url, formData);
       // console.log(response.data);
       const auth_token = await response.data;
       setServerToken(auth_token.token);
@@ -59,7 +59,7 @@ const Register = () => {
   return (
     <>
       <div
-        className={`loginCon max-w-screen-xl ${dark ? "bg-white" : "bg-white"}`}
+        className={`loginCon max-w-screen-xl ${dark ? "bg-white" : "bg-white"} h-screen`}
       >
         <div className="w-full md:w-[1024px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 py-8 px-4">
           {/* LOGIN IMAGE */}

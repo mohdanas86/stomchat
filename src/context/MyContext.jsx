@@ -7,6 +7,7 @@ export const MyProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
+  const [Languagae, setLanguagae] = useState("");
 
   const setServerToken = (serverToken) => {
     setToken(serverToken);
@@ -43,7 +44,7 @@ export const MyProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    userAuthorization()
+    userAuthorization();
   }, [token]);
 
   return (
@@ -56,7 +57,9 @@ export const MyProvider = ({ children }) => {
         user,
         logoutUser,
         dark,
-        setDark
+        setDark,
+        Languagae,
+        setLanguagae,
       }}
     >
       {children}

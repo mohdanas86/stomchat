@@ -2,8 +2,18 @@ import React from "react";
 import { useMyContext } from "../context/MyContext";
 
 const Header = () => {
-  const { login, setLogin, isLoggedIn, logoutUser, dark, setDark } =
-    useMyContext();
+  const {
+    login,
+    setLogin,
+    isLoggedIn,
+    logoutUser,
+    dark,
+    setDark,
+    Languagae,
+    setLanguagae,
+  } = useMyContext();
+
+  console.log(Languagae)
   return (
     <>
       <div
@@ -66,6 +76,10 @@ const Header = () => {
               </a>
             )}
           </div>
+          {/* <ul className="flex gap-2">
+            <li className="border p-2 cursor-pointer" onClick={(e)=>setLanguagae("in hindi")}>Hindi</li>
+            <li className="border p-2 cursor-pointer" onClick={(e)=>setLanguagae("in urdu")}>Urdu</li>
+          </ul> */}
         </div>
       </div>
     </>
