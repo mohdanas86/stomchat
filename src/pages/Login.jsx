@@ -40,7 +40,7 @@ const Login = () => {
     try {
       const local_url = "http://localhost:3001/login";
       const url = "https://form-4b0c.onrender.com/login";
-      const response = await axios.post(local_url, formData);
+      const response = await axios.post(url, formData);
       console.log(response.data);
       const auth_token = await response.data;
       setServerToken(auth_token.token);

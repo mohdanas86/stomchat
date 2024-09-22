@@ -19,7 +19,8 @@ export const MyProvider = ({ children }) => {
   const userAuthorization = async () => {
     if (!token) return; // Early return if no token
 
-    const url = "http://localhost:3000/user";
+    const local_url = "http://localhost:3000/user";
+    const url = "https://form-4b0c.onrender.com/user";
     const response = await fetch(url, {
       method: "GET",
       headers: {

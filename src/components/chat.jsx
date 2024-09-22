@@ -36,7 +36,7 @@ const Chat = () => {
         const lang = `${prompt}  ${Languagae}`;
         setPrompt(lang)
         console.log(prompt)
-        const res = await Axios.get(local_url, {
+        const res = await Axios.get(url, {
           params: { prompt },
         });
         setResponse(res.data.data || "No data received");
