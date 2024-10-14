@@ -7,7 +7,10 @@ export const MyProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState("");
-  const [Languagae, setLanguagae] = useState("");
+  const [language, setLanguage] = useState("");
+  const [response, setResponse] = useState("");
+  const [prompt, setPrompt] = useState("");
+  const [loading, setLoading] = useState(null);
 
   const setServerToken = (serverToken) => {
     setToken(serverToken);
@@ -19,8 +22,8 @@ export const MyProvider = ({ children }) => {
   const userAuthorization = async () => {
     if (!token) return; // Early return if no token
 
-    const local_url = "http://localhost:3000/user";
-    const url = "https://form-4b0c.onrender.com/user";
+    const url = "http://localhost:3000/user";
+    // const url = "https://form-4b0c.onrender.com/user";
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -59,8 +62,14 @@ export const MyProvider = ({ children }) => {
         logoutUser,
         dark,
         setDark,
-        Languagae,
-        setLanguagae,
+        language,
+        setLanguage,
+        response,
+        setResponse,
+        prompt,
+        setPrompt,
+        loading,
+        setLoading,
       }}
     >
       {children}

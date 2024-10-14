@@ -2,22 +2,22 @@ const http = require("http");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+
+const cookieParser = require("cookie-parser");
+
 require('dotenv').config();
 
 const corsOptions = {
-    origin: "http://localhost:3000"
+    origin: "http://localhost:3000",
+    credentials: true,
 };
 app.use(cors(corsOptions));
 
 const port = 3001; // PORT
 app.use(express.json())
 const bodyParser = require("body-parser");
+app.use(cookieParser())
 app.use(bodyParser.json())
-
-// get, POST, PATCH ====== METHODS
-app.get("/", (req, res) => {
-    res.send('helllo');
-});
 
 // ROUTES
 const ChatRouter = require("./routers/chat");

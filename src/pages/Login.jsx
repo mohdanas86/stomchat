@@ -38,12 +38,13 @@ const Login = () => {
     }
 
     try {
-      const local_url = "http://localhost:3001/login";
-      const url = "https://form-4b0c.onrender.com/login";
+      const url = "http://localhost:3001/login";
+      // const url = "https://form-4b0c.onrender.com/login";
       const response = await axios.post(url, formData);
       console.log(response.data);
       const auth_token = await response.data;
-      setServerToken(auth_token.token);
+      console.log(auth_token)
+       setServerToken(auth_token.token);
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +53,7 @@ const Login = () => {
   return (
     <>
       <div
-        className={`loginCon max-w-screen-xl mx-auto px-4 ${
+        className={`loginCon max-w-screen-xl mx-auto h-screen flex justify-center items-center px-4 ${
           dark ? "bg-white" : "bg-white"
         }`}
       >

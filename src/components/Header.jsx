@@ -1,7 +1,76 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import Cookies from "js-cookie";
+import {
+  Dialog,
+  DialogPanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
+} from "@headlessui/react";
+import {
+  ArrowPathIcon,
+  Bars3Icon,
+  ChevronDownIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useMyContext } from "../context/MyContext";
 
-const Header = () => {
+// Language Array
+// const Language = [
+//   { id: 1, language: "English" },
+//   { id: 2, language: "Spanish" },
+//   { id: 3, language: "French" },
+//   { id: 4, language: "German" },
+//   { id: 5, language: "Chinese" },
+//   { id: 6, language: "Italian" },
+//   { id: 7, language: "Portuguese" },
+//   { id: 8, language: "Russian" },
+//   { id: 9, language: "Japanese" },
+//   { id: 10, language: "Arabic" },
+//   { id: 11, language: "Hindi" },
+//   { id: 12, language: "Korean" },
+//   { id: 13, language: "Turkish" },
+//   { id: 14, language: "Bengali" },
+//   { id: 15, language: "Vietnamese" },
+//   { id: 16, language: "Thai" },
+//   { id: 17, language: "Persian" },
+//   { id: 18, language: "Malay" },
+//   { id: 19, language: "Filipino" },
+//   { id: 20, language: "Swahili" },
+// ];
+
+const Language = [
+  // Top 5 languages of India
+  { id: 1, language: "Hindi" },
+  { id: 2, language: "Bengali" },
+  { id: 3, language: "Telugu" },
+  { id: 4, language: "Marathi" },
+  { id: 5, language: "Tamil" },
+  { id: 6, language: "Kannada" },
+
+  // Additional languages from around the world
+  { id: 7, language: "English" },
+  { id: 8, language: "Mandarin Chinese" },
+  { id: 9, language: "Spanish" },
+  { id: 10, language: "Arabic" },
+  { id: 11, language: "French" },
+  { id: 12, language: "Russian" },
+  { id: 13, language: "German" },
+  { id: 14, language: "Japanese" },
+  { id: 15, language: "Portuguese" },
+  { id: 16, language: "Turkish" },
+  { id: 17, language: "Korean" },
+  { id: 18, language: "Vietnamese" },
+  { id: 19, language: "Thai" },
+  { id: 20, language: "Italian" },
+  { id: 21, language: "Dutch" },
+];
+
+export default function Header() {
   const {
     login,
     setLogin,
@@ -9,81 +78,200 @@ const Header = () => {
     logoutUser,
     dark,
     setDark,
-    Languagae,
-    setLanguagae,
+    language,
+    setLanguage,
   } = useMyContext();
 
-  console.log(Languagae)
+  // Cookie setup
+  useEffect(() => {
+    console.log("Selected Language:", language); // Log selected language
+
+    if (language) {
+      Cookies.set("lang", language, { path: "/" });
+      localStorage.setItem("lang", language);
+    } else {
+      Cookies.remove("lang"); // Clear cookie if no language selected
+      localStorage.removeItem("lang"); // Clear localStorage
+    }
+  }, [language]);
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <>
-      <div
-        className={`header w-full shadow ${
-          dark ? "bg-black text-white" : "bg-white text-black"
-        }`}
+    <header
+      className={`bg-white fixed z-50 top-0 w-full ${
+        isLoggedIn ? "block" : "hidden"
+      }`}
+    >
+      <nav
+        aria-label="Global"
+        className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
       >
-        <div className="navContainer flex justify-between items-center  w-full md:w-[1200px] mx-auto px-4 py-4 md:px-0 md:py-3">
-          {/* LOGO */}
-          <div className="logo">
-            <h2 className="logoTitle font-semibold text-2xl">
-              <a href="/">
-                <span className="text-violet-600">Stom</span>Chat
-              </a>
-            </h2>
-          </div>
-
-          <div className="flex justify-center items-center gap-6">
-            {/* DARK MODE BUTTON */}
-            {isLoggedIn ? (
-              <div className="darkMode">
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    className="sr-only peer"
-                    value=""
-                    type="checkbox"
-                    onClick={(e) => setDark((e) => !e, console.log(!e))}
-                  />
-                  <div className="w-12 h-7 rounded-full ring-0 peer duration-500 outline-none bg-gray-200 overflow-hidden before:flex before:items-center before:justify-center after:flex after:items-center after:justify-center before:content-['☀️'] before:absolute before:h-5 before:w-5 before:top-1/2 before:bg-white before:rounded-full before:left-1 before:-translate-y-1/2 before:transition-all before:duration-700 peer-checked:before:opacity-0 peer-checked:before:rotate-90 peer-checked:before:-translate-y-full shadow-lg shadow-gray-400 peer-checked:shadow-lg peer-checked:shadow-gray-700 peer-checked:bg-[#383838] after:content-['🌑'] after:absolute after:bg-[#1d1d1d] after:rounded-full after:top-[4px] after:right-1 after:translate-y-full after:w-5 after:h-5 after:opacity-0 after:transition-all after:duration-700 peer-checked:after:opacity-100 peer-checked:after:rotate-180 peer-checked:after:translate-y-0"></div>
-                </label>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {/* LOGOUT BTN */}
-            {!isLoggedIn ? (
-              <a
-                onClick={(e) => setLogin((e) => !e)}
-                className={`cursor-pointer focus:ring-4 font-medium rounded-2xl text-sm px-4 lg:px-5 py-2 lg:py-1.5 focus:outline-none border hover:border-transparent ${
-                  !dark
-                    ? "text-gray-800 dark:text-white hover:bg-violet-500 hover:text-white focus:ring-gray-300 border-black dark:focus:ring-gray-800 dark:hover:bg-gray-700"
-                    : "text-white hover:bg-gray-200 hover:text-gray-800 focus:ring-gray-500 border-gray-300"
-                }
-`}
-              >
-                {!login ? "Login" : "Register"}
-              </a>
-            ) : (
-              <a
-                onClick={logoutUser}
-                className={`cursor-pointer focus:ring-4 font-medium rounded-2xl text-sm px-4 lg:px-5 py-2 lg:py-1.5 focus:outline-none border hover:border-transparent ${
-                  !dark
-                    ? "text-gray-800 dark:text-white hover:bg-violet-500 hover:text-white focus:ring-gray-300 border-black dark:focus:ring-gray-800 dark:hover:bg-gray-700"
-                    : "text-white hover:bg-gray-200 hover:text-gray-800 focus:ring-gray-500 border-gray-300"
-                }
-`}
-              >
-                logout
-              </a>
-            )}
-          </div>
-          {/* <ul className="flex gap-2">
-            <li className="border p-2 cursor-pointer" onClick={(e)=>setLanguagae("in hindi")}>Hindi</li>
-            <li className="border p-2 cursor-pointer" onClick={(e)=>setLanguagae("in urdu")}>Urdu</li>
-          </ul> */}
+        <div className="flex lg:flex-1">
+          <a href="/" className="-m-1.5 p-1.5">
+            <span className="sr-only">StomChat</span>
+            <img
+              alt="stomilar"
+              src="https://stomilar-blog.onrender.com/loogo.jpg"
+              className="h-8 w-auto"
+            />
+          </a>
         </div>
-      </div>
-    </>
-  );
-};
+        <div className="flex lg:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          >
+            <span className="sr-only">Open main menu</span>
+            <Bars3Icon aria-hidden="true" className="h-6 w-6" />
+          </button>
+        </div>
+        <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          <Popover className="relative">
+            <PopoverButton className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
+              {!language ? "language" : language}
+              <ChevronDownIcon
+                aria-hidden="true"
+                className="h-5 w-5 flex-none text-gray-400"
+              />
+            </PopoverButton>
 
-export default Header;
+            <PopoverPanel
+              transition
+              className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in"
+            >
+              <div className="langContainer p-4 lg:h-[60vh] overflow-y-scroll">
+                {Language.map((item) => (
+                  <div
+                    key={item.id}
+                    onClick={() => setLanguage(item.language)}
+                    className="group relative flex items-center gap-x-6 rounded-lg p-3 text-sm leading-6 hover:bg-gray-50"
+                  >
+                    <div className="flex-auto">
+                      <span className="block font-semibold text-gray-900">
+                        {item.language}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </PopoverPanel>
+          </Popover>
+
+          {isLoggedIn ? (
+            <div className="darkMode">
+              <label className="flex cursor-pointer gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="5" />
+                  <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                </svg>
+                <input
+                  type="checkbox"
+                  value="synthwave"
+                  className="toggle theme-controller"
+                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </label>
+            </div>
+          ) : (
+            ""
+          )}
+        </PopoverGroup>
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <a
+            onClick={logoutUser}
+            className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer"
+          >
+            Logout <span aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </nav>
+
+      <Dialog
+        open={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        className="lg:hidden"
+      >
+        <div className="fixed inset-0 z-10" />
+        <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <a href="/" className="-m-1.5 p-1.5">
+              <span className="sr-only">StomChat</span>
+              <img
+                alt="stomchat"
+                src="https://stomilar-blog.onrender.com/loogo.jpg"
+                className="h-8 w-auto"
+              />
+            </a>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(false)}
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+            >
+              <span className="sr-only">Close menu</span>
+              <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+            </button>
+          </div>
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                <Disclosure as="div" className="-mx-3">
+                  <DisclosureButton className="group flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                    Language
+                    <ChevronDownIcon
+                      aria-hidden="true"
+                      className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                    />
+                  </DisclosureButton>
+                  <DisclosurePanel className="mt-2 space-y-2">
+                    {Language.map((item) => (
+                      <DisclosureButton
+                        key={item.id}
+                        onClick={() => setLanguage(item.language)}
+                        as="span"
+                        className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                      >
+                        {item.language}
+                      </DisclosureButton>
+                    ))}
+                  </DisclosurePanel>
+                </Disclosure>
+              </div>
+              <div className="py-6">
+                <a
+                  onClick={logoutUser}
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
+                  Logout
+                </a>
+              </div>
+            </div>
+          </div>
+        </DialogPanel>
+      </Dialog>
+    </header>
+  );
+}

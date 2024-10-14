@@ -82,8 +82,8 @@
 .chat-input {
   display: flex;
   align-items: center;
-  padding: 20px;
-  height: 30px;
+  /* padding: 20px;
+  height: 30px; */
 }
 
 .message-input {
@@ -152,4 +152,7 @@
 
 
 
-
+/* HEADER LANGUAGE CONTAINER */
+.langContainer::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
